@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/new'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # root 'controller_name#action_name'
@@ -8,4 +7,6 @@ Rails.application.routes.draw do
   get 'static_pages/about', as: 'static_pages_about'
   get 'static_pages/contact', as: 'static_pages_contact'
   get 'signup'  => 'users#new'
+
+  resources :users
 end
