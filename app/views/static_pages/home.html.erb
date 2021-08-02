@@ -1,5 +1,6 @@
 <%= provide(:title, "Home") %>
 <div class="center jumbotron">
+  <h2 id="heading" onclick="this.innerHTML = 'kkk'">aaaa <%= [1, 2, 3].first %></h2>
   <h1>Welcome to the Sample App</h1>
 
   <h2>
@@ -13,3 +14,7 @@
 
 <%= link_to image_tag("rails.png", alt: "Rails logo"),
             'http://rubyonrails.org/' %>
+<script>
+const heading = document.querySelector("#heading");
+heading.innerHTML = "new heading"
+</script>
