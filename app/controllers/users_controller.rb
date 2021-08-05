@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: %i[index edit update]
+  before_action :correct_user, only: %i[edit update]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -12,16 +14,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
       login @user
-      flash[:success] = "Welcome to Rails tutorial sample app"
+      flash[:success] = 'Welcome to Rails tutorial sample app'
       redirect_to @user
     else
-      render "new"
+      render 'new'
     end
   end
 
@@ -34,11 +37,11 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       # Handle success
-      flash[:success] = "Successfully updated!"
+      flash[:success] = 'Successfully updated!'
       redirect_to @user
     else
       # Hanlde failure
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -48,17 +51,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please login kar lo!"
-      redirect_to login_path
-    end
-  end
-
   def correct_user
     @user = User.find params[:id]
     redirect_to root_path unless current_user?(@user)
   end
-
 end
