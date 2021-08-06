@@ -9,14 +9,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create!(name: 'Example User',
-             email: 'user@example.com',
+             email: 'nnneerajjj@gmail.com',
              password: 'password',
              password_confirmation: 'password')
 
 99.times do |index|
   name = Faker::Name.name
   User.create!(name: name,
-               email: "user#{index}@example.com",
+               email: "example-#{index+1}@railstutorial.org",
                password: 'password',
                password_confirmation: 'password')
 end
